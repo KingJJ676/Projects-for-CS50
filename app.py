@@ -77,7 +77,7 @@ def createEvent():
 def event(event_id):
     eventID = event_id
     eventName = db.execute("SELECT eventName FROM events WHERE eventID = ?", eventID)[0]["eventName"]
-    eventLink = "https://meetup/event/" + str(eventID)
+    eventLink = "https://meetup.netlify.app/event/" + str(eventID)
 
     return render_template("event.html", eventName=eventName, eventLink=eventLink, eventID=eventID)
 
@@ -155,7 +155,7 @@ def login(eventID):
 @login_required
 def schedule(eventID):
     eventName = db.execute("SELECT eventName FROM events WHERE eventID = ?", eventID)[0]["eventName"]
-    eventLink = "https://meetup/event/" + str(eventID)
+    eventLink = "https://meetup.netlify.app/event/" + str(eventID)
 
     if request.method == "POST":
 
@@ -179,7 +179,7 @@ def schedule(eventID):
 @login_required
 def result(eventID):
     eventName = db.execute("SELECT eventName FROM events WHERE eventID = ?", eventID)[0]["eventName"]
-    eventLink = "https://meetup/event/" + str(eventID)
+    eventLink = "https://meetup.netlify.app/event/" + str(eventID)
 
     # sort all available time
     allAva = db.execute("SELECT time, COUNT(memberID) as memberCount FROM availability WHERE eventID = ? GROUP BY time ORDER BY memberCount DESC", eventID)
